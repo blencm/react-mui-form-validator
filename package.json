@@ -1,6 +1,6 @@
 {
   "name": "react-mui-form-validator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Validator for forms designed with material-ui components.",
   "main": "./lib/index.js",
   "scripts": {
@@ -42,6 +42,7 @@
     "@babel/core": "^7.17.2",
     "@babel/plugin-syntax-jsx": "^7.16.7",
     "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.3",
     "eslint": "^8.9.0",
