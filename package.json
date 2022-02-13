@@ -1,7 +1,7 @@
 {
   "name": "react-mui-form-validator",
-  "version": "1.0.0",
-  "description": "Simple validator for forms designed with material-ui v1/v3/v4/v5 components.",
+  "version": "1.0.1",
+  "description": "Validator for forms designed with material-ui components.",
   "main": "./lib/index.js",
   "scripts": {
     "build": "rimraf lib && npm install --ignore-scripts && babel src --out-dir lib",
@@ -17,6 +17,7 @@
     "material-ui",
     "mui",
     "form",
+    "form-validator",
     "validator"
   ],
   "author": "Blencm",
