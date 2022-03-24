@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Promise from 'promise-polyfill';
-import createReactContext from 'react-create-theme-context';
+import createReactContext from 'mini-create-react-context';
 import Rules from './MuiRules';
 
 const FormContext = createReactContext('form');

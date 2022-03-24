@@ -1,6 +1,6 @@
 {
   "name": "react-mui-form-validator",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Validator for forms designed with material-ui components.",
   "main": "./lib/index.js",
   "scripts": {
@@ -27,10 +27,10 @@
   },
   "homepage": "https://github.com/Blencm/react-mui-form-validator#readme",
   "dependencies": {
-    "core-js": "^3.21.0",
-    "promise-polyfill": "^8.2.1",
+    "core-js": "^3.21.1",
+    "mini-create-react-context": "^0.4.1",
+    "promise-polyfill": "^8.2.3",
     "prop-types": "^15.8.1",
-    "react-create-theme-context": "^0.0.1",
     "react-lifecycles-compat": "^3.0.4"
   },
   "peerDependencies": {
@@ -38,18 +38,18 @@
     "react-dom": "^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.0",
-    "@babel/core": "^7.17.2",
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.8",
     "@babel/plugin-syntax-jsx": "^7.16.7",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "babel-eslint": "^10.1.0",
-    "babel-loader": "^8.2.3",
-    "eslint": "^8.9.0",
+    "babel-loader": "^8.2.4",
+    "eslint": "^8.11.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "6.5.1",
-    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react": "^7.29.4",
     "rimraf": "^3.0.2"
   }
 }

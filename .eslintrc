@@ -1,9 +1,7 @@
 {
-  "parser"  : "babel-eslint",
-  "plugins": [
-    "import"
-  ],
-  "extends" : ["airbnb"],
+  "parser": "babel-eslint",
+  "plugins": ["import"],
+  "extends": ["airbnb"],
   "rules": {
     // Soft some rules.
     "camelcase": "off",
@@ -12,7 +10,7 @@
     "indent": [2, 4, { "SwitchCase": 1, "VariableDeclarator": 1 }],
     "linebreak-style": "off",
     "max-len": "off",
-    "new-cap": [2, {"capIsNew": false, "newIsCap": true}], // For Record() etc.
+    "new-cap": [2, { "capIsNew": false, "newIsCap": true }], // For Record() etc.
     "newline-per-chained-call": 0,
     "no-cond-assign": "off",
     "no-floating-decimal": 0, // .5 is just fine.
@@ -24,7 +22,7 @@
     "react/no-string-refs": 0,
     "no-underscore-dangle": "off",
     // eslint-plugin-import
-    "import/no-unresolved": [2, {"commonjs": true}],
+    "import/no-unresolved": [2, { "commonjs": true }],
     "import/no-extraneous-dependencies": 0,
     "import/named": 2,
     "import/default": 2,
@@ -40,7 +38,7 @@
     "react/no-array-index-key": 0,
     "react/forbid-prop-types": 0,
     "react/require-default-props": 0,
-    "jsx-a11y/anchor-has-content": 0,
+    "jsx-a11y/anchor-has-content": 0
   },
   "globals": {
     "after": false,
@@ -57,20 +55,13 @@
     "location": true,
     "XMLHttpRequest": true,
     "XDomainRequest": true,
-    "Blob": true,
+    "Blob": true
   },
   "settings": {
-    "import/ignore": [
-      "node_modules",
-      "\\.json$"
-    ],
+    "import/ignore": ["node_modules", "\\.json$"],
     "import/parser": "babel-eslint",
     "import/resolve": {
-      "extensions": [
-        ".js",
-        ".jsx",
-        ".json"
-      ]
+      "extensions": [".js", ".jsx", ".json"]
     }
   }
 }
