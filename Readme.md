@@ -21,15 +21,6 @@ TextField
 />
 ```
 
-Select
-```javascript
-<MuiTextSelect
-  {...someProps}
-  validators={["required"]}
-  errorMessages={["this select is required"]}
-/>
-```
-
 Checkbox
 ```javascript
 <MuiCheckbox
@@ -69,7 +60,6 @@ class MyForm extends React.Component {
     const { email } = this.state;
     return (
       <MuiForm
-        ref="form"
         onSubmit={this.handleSubmit}
         onError={(errors) => console.log(errors)}
       >
