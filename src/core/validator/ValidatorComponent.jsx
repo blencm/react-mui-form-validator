@@ -1,13 +1,12 @@
-/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Promise from 'promise-polyfill';
 /* eslint-enable */
 import { polyfill } from 'react-lifecycles-compat';
-import MuiForm, { FormContext } from './MuiForm';
+import ValidatorForm, { FormContext } from './ValidatorForm';
 import { debounce } from '../utils/utils';
 
-class MuiComponent extends React.Component {
+class ValidatorComponent extends React.Component {
     static getDerivedStateFromProps(nextProps, prevState) {
         if (nextProps.validators && nextProps.errorMessages &&
             (
@@ -81,7 +80,7 @@ class MuiComponent extends React.Component {
 
     validate = (value, includeRequired = false, dryRun = false) => {
         const validations = Promise.all(
-            this.state.validators.map(validator => MuiForm.getValidator(validator, value, includeRequired)),
+            this.state.validators.map(validator => ValidatorForm.getValidator(validator, value, includeRequired)),
         );
 
         return validations.then((results) => {
@@ -116,7 +115,7 @@ class MuiComponent extends React.Component {
         if (!this.form) {
             this.form = form;
         }
-        return this.renderMuiComponent();
+        return this.renderValidatorComponent();
     }
 
     render() {
@@ -128,7 +127,7 @@ class MuiComponent extends React.Component {
     }
 }
 
-MuiComponent.propTypes = {
+ValidatorComponent.propTypes = {
     errorMessages: PropTypes.oneOfType([
         PropTypes.array,
         PropTypes.string,
@@ -140,12 +139,12 @@ MuiComponent.propTypes = {
     containerProps: PropTypes.object,
 };
 
-MuiComponent.defaultProps = {
+ValidatorComponent.defaultProps = {
     errorMessages: 'error',
     validators: [],
     validatorListener: () => {},
 };
 
-polyfill(MuiComponent);
+polyfill(ValidatorComponent);
 
-export default MuiComponent;
+export default ValidatorComponent;

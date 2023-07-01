@@ -1,9 +1,9 @@
-import React from "react";
-import TextField from "@mui/material/TextField";
-import MuiComponent from "../core/MuiComponent";
 
-export default class MuiTextField extends MuiComponent {
-  renderMuiComponent() {
+import TextField from "@mui/material/TextField"
+import ValidatorComponent from "utils/ui/validator/ValidatorComponent";
+
+export default class TextValidator extends ValidatorComponent {
+  renderValidatorComponent() {
     const {
       error,
       errorMessages,
