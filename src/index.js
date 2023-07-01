@@ -1,9 +1,9 @@
-import component from "./core/MuiComponent";
-import form from "./core/MuiForm";
-import field from "./components/MuiTextField";
-import checkbox from "./components/MuiCheckbox";
+import component from "./core/validator/ValidatorComponent";
+import form from "./core/validator/ValidatorForm";
+import field from "./components/TextValidator";
+import select from "./components/SelectValidator";
 
-exports.MuiTextField = field;
-exports.MuiCheckbox = checkbox;
-exports.MuiComponent = component;
-exports.MuiForm = form;
+exports.TextFieldValidator = field;
+exports.SelectValidator = select;
+exports.ComponentValidator = component;
+exports.FormValidator = form;
