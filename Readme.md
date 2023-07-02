@@ -15,7 +15,7 @@ Some rules can accept extra parameter, example:
 
 TextField
 ```javascript
-<TextFieldValidator
+<MuiTextField
   {...someProps}
   validators={["minNumber:0", "maxNumber:255", "matchRegexp:^[0-9]$"]}
 />
@@ -29,7 +29,7 @@ Your component must [provide a theme](http://www.material-ui.com/#/get-started/u
 ```javascript
 import React from "react";
 import Button from "@mui/material/Button";
-import { FormValidator, TextFieldValidator } from "react-mui-form-validator";
+import { MuiForm, MuiTextField } from "react-mui-form-validator";
 
 class MyForm extends React.Component {
   state = {
@@ -48,11 +48,11 @@ class MyForm extends React.Component {
   render() {
     const { email } = this.state;
     return (
-      <FormValidator
+      <MuiForm
         onSubmit={this.handleSubmit}
         onError={(errors) => console.log(errors)}
       >
-        <TextFieldValidator
+        <MuiTextField
           label="Email"
           onChange={this.handleChange}
           name="email"
@@ -61,7 +61,7 @@ class MyForm extends React.Component {
           errorMessages={["this field is required", "email is not valid"]}
         />
         <Button type="submit">Submit</Button>
-      </FormValidator>
+      </MuiForm>
     );
   }
 }
@@ -73,7 +73,7 @@ You can add your custom rules:
 
 import React from 'react';
 import Button from '@mui/material/Button';
-import { FormValidator, TextFieldValidator} from 'react-mui-form-validator';
+import { MuiForm, MuiTextField} from 'react-mui-form-validator';
 
 class ResetPasswordForm extends React.Component {
 
@@ -86,7 +86,7 @@ class ResetPasswordForm extends React.Component {
 
     componentDidMount() {
         // custom rule will have name 'isPasswordMatch'
-        FormValidator.addValidationRule('isPasswordMatch', (value) => {
+        MuiForm.addValidationRule('isPasswordMatch', (value) => {
             if (value !== this.state.user.password) {
                 return false;
             }
@@ -96,7 +96,7 @@ class ResetPasswordForm extends React.Component {
 
     componentWillUnmount() {
         // remove rule when it is not needed
-        FormValidator.removeValidationRule('isPasswordMatch');
+        MuiForm.removeValidationRule('isPasswordMatch');
     }
 
     handleChange = (event) => {
@@ -113,10 +113,10 @@ class ResetPasswordForm extends React.Component {
         const { user } = this.state;
 
         return (
-            <FormValidator
+            <MuiForm
                 onSubmit={this.handleSubmit}
             >
-                <TextFieldValidator
+                <MuiTextField
                     label="Password"
                     onChange={this.handleChange}
                     name="password"
@@ -125,7 +125,7 @@ class ResetPasswordForm extends React.Component {
                     errorMessages={['this field is required']}
                     value={user.password}
                 />
-                <TextFieldValidator
+                <MuiTextField
                     label="Repeat password"
                     onChange={this.handleChange}
                     name="repeatPassword"
@@ -135,7 +135,7 @@ class ResetPasswordForm extends React.Component {
                     value={user.repeatPassword}
                 />
                 <Button type="submit">Submit</Button>
-            </FormValidator>
+            </MuiForm>
         );
     }
 

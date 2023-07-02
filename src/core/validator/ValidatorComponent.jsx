@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Promise from 'promise-polyfill';
@@ -69,6 +70,7 @@ class ValidatorComponent extends React.Component {
     }
 
     instantValidate = true
+
     invalid = []
 
     configure = () => {

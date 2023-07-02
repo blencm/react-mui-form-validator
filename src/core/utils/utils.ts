@@ -1,12 +1,12 @@
-const debounce = (func, wait, immediate) => {
-    let timeout;
+const debounce = <T extends any[]>(func: (...args: T) => void, wait: number, immediate: boolean) => {
+    let timeout: any;
     function cancel() {
         if (timeout !== undefined) {
             clearTimeout(timeout);
         }
     }
-    const debounced = function debounced(...args) {
-        const context = this;
+    const debounced = function debounced(...args: T) {
+        const context = args;
         const later = function delayed() {
             timeout = null;
             if (!immediate) {

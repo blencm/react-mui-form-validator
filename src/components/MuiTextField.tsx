@@ -1,8 +1,10 @@
 import TextField from "@mui/material/TextField";
-import { ValidatorComponent } from "utils/ui/validator/index";
+import React from "react";
+import ValidatorComponent from "../core/validator/ValidatorComponent";
 
-export default class SelectValidator extends ValidatorComponent {
+export default class TextValidator extends ValidatorComponent {
   renderValidatorComponent() {
+    /* eslint-disable no-unused-vars */
     const {
       error,
       errorMessages,
@@ -18,7 +20,6 @@ export default class SelectValidator extends ValidatorComponent {
     return (
       <TextField
         {...rest}
-        select
         error={!isValid || error}
         helperText={(!isValid && this.getErrorMessage()) || helperText}
       />

@@ -1,8 +1,8 @@
-
-import TextField from "@mui/material/TextField"
-import ValidatorComponent from "utils/ui/validator/ValidatorComponent";
-
-export default class TextValidator extends ValidatorComponent {
+import { TextField } from "@mui/material";
+import ValidatorComponent from "../core/validator/ValidatorComponent";
+import React from "react";
+  
+export default class MuiSelect extends ValidatorComponent {
   renderValidatorComponent() {
     const {
       error,
@@ -19,6 +19,7 @@ export default class TextValidator extends ValidatorComponent {
     return (
       <TextField
         {...rest}
+        select
         error={!isValid || error}
         helperText={(!isValid && this.getErrorMessage()) || helperText}
       />
