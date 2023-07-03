@@ -27,14 +27,10 @@
   "dependencies": {
     "@mui/material": "^5.13.6",
     "@types/prop-types": "^15.7.5",
-    "gud": "^1.0.0",
-    "promise-polyfill": "^8.3.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.45.1",
     "react-lifecycles-compat": "^3.0.4",
-    "tiny-warning": "^1.0.3",
     "tsup": "^7.1.0",
     "typescript": "^5.1.6",
     "warning": "^4.0.3"
@@ -45,7 +41,6 @@
   },
   "devDependencies": {
     "@types/node": "^20.3.3",
-    "@types/promise-polyfill": "^6.0.4",
     "@types/react": "18.2.14",
     "@types/react-dom": "^18.2.6",
     "@types/react-lifecycles-compat": "^3.0.1",
@@ -59,7 +54,6 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "rimraf": "^5.0.1"
+    "eslint-plugin-react-hooks": "^4.6.0"
   }
 }

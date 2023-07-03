@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React from "react";
 import PropTypes from "prop-types";
-import Promise from "promise-polyfill";
 import createReactContext from "../context/index";
 /* eslint-enable */
 import Rules from "./ValidationRules";

@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
-import Promise from 'promise-polyfill';
 /* eslint-enable */
 import { polyfill } from 'react-lifecycles-compat';
 import ValidatorForm, { FormContext } from './ValidatorForm';
@@ -80,27 +79,26 @@ class ValidatorComponent extends React.Component {
         this.validateDebounced = debounce(this.validate, this.debounceTime);
     }
 
-    validate = (value, includeRequired = false, dryRun = false) => {
+    validate = async (value, includeRequired = false, dryRun = false) => {
         const validations = Promise.all(
             this.state.validators.map(validator => ValidatorForm.getValidator(validator, value, includeRequired)),
         );
 
-        return validations.then((results) => {
-            this.invalid = [];
-            let valid = true;
-            results.forEach((result, key) => {
-                if (!result) {
-                    valid = false;
-                    this.invalid.push(key);
-                }
-            });
-            if (!dryRun) {
-                this.setState({ isValid: valid }, () => {
-                    this.props.validatorListener(this.state.isValid);
-                });
+        const results = await validations;
+        this.invalid = [];
+        let valid = true;
+        results.forEach((result, key) => {
+            if (!result) {
+                valid = false;
+                this.invalid.push(key);
             }
-            return valid;
         });
+        if (!dryRun) {
+            this.setState({ isValid: valid }, () => {
+                this.props.validatorListener(this.state.isValid);
+            });
+        }
+        return valid;
     }
 
     isValid = () => this.state.isValid;
