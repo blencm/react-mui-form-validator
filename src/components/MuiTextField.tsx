@@ -2,18 +2,14 @@ import TextField from "@mui/material/TextField";
 import React from "react";
 import ValidatorComponent from "../core/validator/ValidatorComponent";
 
-export default class TextValidator extends ValidatorComponent {
+export default class MuiTextField extends ValidatorComponent {
   renderValidatorComponent() {
-    /* eslint-disable no-unused-vars */
     const {
       error,
       errorMessages,
       validators,
-      requiredError,
       helperText,
       validatorListener,
-      withRequiredValidator,
-      containerProps,
       ...rest
     } = this.props;
     const { isValid } = this.state;
@@ -22,6 +18,7 @@ export default class TextValidator extends ValidatorComponent {
         {...rest}
         error={!isValid || error}
         helperText={(!isValid && this.getErrorMessage()) || helperText}
+        
       />
     );
   }

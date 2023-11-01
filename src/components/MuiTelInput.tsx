@@ -1,8 +1,8 @@
-import * as React from "react";
-import { TextField } from "@mui/material";
+import React from "react";
 import ValidatorComponent from "../core/validator/ValidatorComponent";
-export default class MuiSelect extends ValidatorComponent {
-  
+import { MuiTelInput } from "mui-tel-input";
+
+export default class MuiTelInputDefault extends ValidatorComponent {
   renderValidatorComponent() {
     const {
       error,
@@ -12,14 +12,16 @@ export default class MuiSelect extends ValidatorComponent {
       validatorListener,
       withRequiredValidator,
       containerProps,
+      onChangeTel,
       ...rest
     } = this.props;
     const { isValid } = this.state;
+
     return (
-      <TextField
+      <MuiTelInput
         {...rest}
-        select
         error={!isValid || error}
+        onChange={onChangeTel}
         helperText={(!isValid && this.getErrorMessage()) || helperText}
       />
     );
