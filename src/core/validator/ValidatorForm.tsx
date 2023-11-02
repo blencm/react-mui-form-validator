@@ -1,5 +1,5 @@
 import * as React from "react";
-import Rules from "./ValidationRules";
+import { validations } from "./ValidationRules";
 import { ValidatorFormProps } from "../interface/Validator";
 import { Validator } from "../types/ValidatorType";
 
@@ -8,70 +8,98 @@ const FormContext = React.createContext<any>("form");
 export { FormContext };
 
 class ValidatorForm extends React.Component<ValidatorFormProps> {
-  static getValidator = (value: any, validator: Validator): boolean => {
+
+  static getValidator = (
+    validator: Validator,
+    value: any,
+    includeRequired: boolean
+  ): boolean => {
     let valid = validator;
 
-    switch (valid.validator) {
-      case "required":
-        return Rules.isEmpty(value);
-      case "isEmail":
-        return Rules.isEmail(value);
-      case "isEmpty":
-        return Rules.isEmpty(value);
-      case "allowedExtensions":
-        return Rules.allowedExtensions(value, valid.fileTypes);
-      case "isFile":
-        return Rules.isFile(value);
-      case "isFloat":
-        return Rules.isFloat(value);
-      case "isNumber":
-        return Rules.isNumber(value);
-      case "isPositive":
-        return Rules.isPositive(value);
-      case "isString":
-        return Rules.isString(value);
-      case "matchRegexp":
-        return Rules.matchRegexp(value, valid.regexp);
-      case "maxFileSize":
-        return Rules.maxFileSize(value, valid.max);
-      case "maxFloat":
-        return Rules.maxFloat(value, valid.max);
-      case "maxNumber":
-        return Rules.maxNumber(value, valid.max);
-      case "maxStringLength":
-        return Rules.maxStringLength(value, valid.max);
-      case "minFloat":
-        return Rules.minFloat(value, valid.min);
-      case "minNumber":
-        return Rules.minNumber(value, valid.min);
-      case "minStringLength":
-        return Rules.minStringLength(value, valid.min);
-      case "trim":
-        return Rules.trim(value);
-      default:
-        return true;
+    let result = true;
+    if (valid.validator !== "required" || includeRequired) {
+      switch (valid.validator) {
+        case "required":
+          result = validations.required(value);
+          break;
+        case "isEmail":
+          result = validations.isEmail(value);
+          break;
+        case "isEmpty":
+          result = validations.isEmpty(value);
+          break;
+        case "allowedExtensions":
+          result = validations.allowedExtensions(value, valid.fileTypes);
+          break;
+        case "isFile":
+          result = validations.isFile(value);
+          break;
+        case "isFloat":
+          result = validations.isFloat(value);
+          break;
+        case "isNumber":
+          result = validations.isNumber(value);
+          break;
+        case "isPositive":
+          result = validations.isPositive(value);
+          break;
+        case "isString":
+          result = validations.isString(value);
+          break;
+        case "matchRegexp":
+          result = validations.matchRegexp(value, valid.regexp);
+          break;
+        case "maxFileSize":
+          result = validations.maxFileSize(value, valid.max);
+          break;
+        case "maxFloat":
+          result = validations.maxFloat(value, valid.max);
+          break;
+        case "maxNumber":
+          result = validations.maxNumber(value, valid.max);
+          break;
+        case "maxStringLength":
+          result = validations.maxStringLength(value, valid.max);
+          break;
+        case "minFloat":
+          result = validations.minFloat(value, valid.min);
+          break;
+        case "minNumber":
+          result = validations.minNumber(value, valid.min);
+          break;
+        case "minStringLength":
+          result = validations.minStringLength(value, valid.min);
+          break;
+        case "trim":
+          result = validations.trim(value);
+          break;
+        default:
+          result = true;
+          break;
+      }
     }
+    return result;
   };
+
+  getFormHelpers = () => ({
+    form: {
+      attachToForm: this.attachToForm,
+      detachFromForm: this.detachFromForm,
+      instantValidate: this.instantValidate,
+      debounceTime: this.debounceTime,
+    },
+  });
+
+  instantValidate =
+    this.props.instantValidate !== undefined
+      ? this.props.instantValidate
+      : true;
 
   childs: any[] = [];
 
   errors: any[] = [];
 
-  instantValidate: boolean =
-    this.props.instantValidate !== undefined
-      ? this.props.instantValidate
-      : true;
-
-  debounceTime: number | undefined = this.props.debounceTime;
-
-  getFormHelpers = () => ({
-    form: {
-      attachToForm: this.attachToForm,
-      debounceTime: this.props.debounceTime,
-      detachFromForm: this.detachFromForm,
-      instantValidate: this.props.instantValidate,
-    },
-  });
+  debounceTime: number = this.props.debounceTime !== undefined ? this.props.debounceTime : 0;
 
   attachToForm = (component: any) => {
     if (this.childs.indexOf(component) === -1) {
@@ -96,7 +124,9 @@ class ValidatorForm extends React.Component<ValidatorFormProps> {
     this.errors = [];
     this.walk(this.childs).then((result: boolean) => {
       if (this.errors.length) {
-        this.props.onError!(this.errors);
+        if (this.props.onError != undefined) {
+          this.props.onError(this.errors);
+        }
       }
       if (result) {
         this.props.onSubmit();
@@ -129,7 +159,7 @@ class ValidatorForm extends React.Component<ValidatorFormProps> {
   checkInput = (input: any, dryRun?: boolean): Promise<boolean> =>
     new Promise((resolve) => {
       let result = true;
-      const validators = input.props.validators;
+      const validators: Validator[] = input.props.validators;
       if (validators) {
         this.validate(input, true, dryRun).then((data) => {
           if (!data) {

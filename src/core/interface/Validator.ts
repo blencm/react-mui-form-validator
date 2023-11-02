@@ -28,7 +28,7 @@ export type Validator1 =
   | "allowedExtensions";
 
 export type MuiTextFieldProps<
-  Variant extends TextFieldVariants = TextFieldVariants,
+  Variant extends TextFieldVariants = TextFieldVariants
 > = Variant extends "filled"
   ? FilledTextFieldProps
   : Variant extends "standard"
@@ -58,9 +58,9 @@ export interface CustomProps {
 }
 
 export interface ValidatorFormProps {
+  children: React.ReactNode;
   onSubmit: () => void;
   instantValidate?: boolean;
-  children?: React.ReactNode;
-  onError?: (errors: any[]) => void;
+  onError?: (errors: any) => void;
   debounceTime?: number;
 }

@@ -12,38 +12,10 @@ class ValidatorComponent extends React.Component<
   MuiTextFieldProps & ValidatorComponentProps,
   ValidatorComponentState
 > {
-  renderValidatorComponent(): React.ReactNode {
-    throw new Error("Method not implemented.");
-  }
-
-  form: any;
-
-  debounceTime: any;
-
-  validateDebounced:
-    | {
-        (
-          value: any,
-          includeRequired?: boolean | undefined,
-          dryRun?: boolean | undefined
-        ): void;
-        cancel: () => void;
-      }
-    | any;
-
-  constructor(props: MuiTextFieldProps & ValidatorComponentProps) {
-    super(props);
-    this.state = {
-      isValid: true,
-      value: this.props.value,
-      errorMessages: this.props.errorMessages,
-      validators: this.props.validators,
-    };
-  }
-
+  [x: string]: any;
   getSnapshotBeforeUpdate(
-    nextProps: Readonly<MuiTextFieldProps & ValidatorComponentProps>,
-    prevState: Readonly<ValidatorComponentState>
+    nextProps: ValidatorComponentProps,
+    prevState: ValidatorComponentState
   ) {
     if (
       nextProps.validators &&
@@ -57,35 +29,32 @@ class ValidatorComponent extends React.Component<
         errorMessages: nextProps.errorMessages,
       };
     }
+
     return {
       value: nextProps.value,
     };
   }
 
-  instantValidate: boolean = true;
-
-  invalid: number[] = [];
+  state = {
+    isValid: true,
+    value: this.props.value,
+    errorMessages: this.props.errorMessages,
+    validators: this.props.validators,
+  };
 
   componentDidMount() {
     this.configure();
   }
 
-  configure = () => {
-    this.form.attachToForm(this);
-    this.instantValidate = this.form.instantValidate;
-    this.debounceTime = this.form.debounceTime;
-    this.validateDebounced = debounce(this.validate, this.debounceTime);
-  };
-
   shouldComponentUpdate(
-    nextProps: MuiTextFieldProps,
+    nextProps: ValidatorComponentProps,
     nextState: ValidatorComponentState
   ) {
     return this.state !== nextState || this.props !== nextProps;
   }
 
   componentDidUpdate(
-    prevProps: MuiTextFieldProps,
+    prevProps: ValidatorComponentProps,
     prevState: ValidatorComponentState
   ) {
     if (this.instantValidate && this.props.value !== prevState.value) {
@@ -114,42 +83,59 @@ class ValidatorComponent extends React.Component<
         }
       }
     }
+
     return true;
   };
 
-  validate = async (value: any, dryRun = false): Promise<boolean> => {
-    let valid = false;
+  instantValidate: boolean = true;
+
+  invalid: number[] = [];
+
+  configure = () => {
+    this.form.attachToForm(this);
+    this.instantValidate = this.form.instantValidate;
+    this.debounceTime = this.form.debounceTime;
+    this.validateDebounced = debounce(this.validate, this.debounceTime);
+  };
+
+  validate = async (
+    value: any,
+    includeRequired = false,
+    dryRun = false
+  ): Promise<boolean> => {
     if (this.state.validators) {
       const validations = Promise.all(
         this.state.validators.map((validator) =>
-          ValidatorForm.getValidator(value, validator)
+          ValidatorForm.getValidator(validator, value, includeRequired)
         )
       );
-
-      const results = await validations;
-      this.invalid = [];
-      valid = true;
-      results.forEach((result, key) => {
-        if (!result) {
-          valid = false;
-          this.invalid.push(key);
-        }
-      });
-      if (!dryRun) {
-        this.setState({ isValid: valid }, () => {
-          if (this.props.validatorListener)
-            this.props.validatorListener(
-              this.state.isValid === undefined ? false : this.state.isValid
-            );
+      return validations.then((results) => {
+        this.invalid = [];
+        let valid = true;
+        results.forEach((result, key) => {
+          if (!result) {
+            valid = false;
+            this.invalid.push(key);
+          }
         });
-      }
+        if (!dryRun) {
+          this.setState({ isValid: valid }, () => {
+            if (this.props.validatorListener != undefined) {
+              this.props.validatorListener(
+                this.state.isValid === undefined ? true : this.state.isValid
+              );
+            }
+          });
+        }
+        return valid;
+      });
+    } else {
+      return true;
     }
-
-    return valid;
   };
 
   isValid = (): boolean =>
-    this.state.isValid === undefined ? false : this.state.isValid;
+    this.state.isValid === undefined ? true : this.state.isValid;
 
   makeInvalid = () => {
     this.setState({ isValid: false });

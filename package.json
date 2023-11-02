@@ -1,11 +1,12 @@
 {
   "name": "react-mui-form-validator",
-  "version": "1.5.0",
+  "version": "1.5.4",
   "description": "Validator for forms designed with material-ui components.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "prod": "rimraf ./lib && tsup src/index.ts --dts --outDir=lib",
+    "start": "react-scripts start",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -39,12 +40,26 @@
   },
   "devDependencies": {
     "@mui/material": "^5.14.16",
-    "@types/react": "^18.2.33",
+    "@types/node": "^20.8.10",
+    "@types/react": "^18.2.34",
     "@types/react-dom": "^18.2.14",
     "@types/react-lifecycles-compat": "^3.0.3",
     "mui-tel-input": "4.0.1",
     "rimraf": "^5.0.5",
     "tsup": "^7.2.0",
-    "typescript": "^5.2.2"
+    "react-scripts": "5.0.1",
+    "typescript": "^4.9.5"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

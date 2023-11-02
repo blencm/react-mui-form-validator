@@ -16,7 +16,7 @@ const isEmptyTrimed = function (value: any): boolean {
   return true;
 };
 
-const validations = {
+export const validations = {
   matchRegexp: (value: any, regexp: RegExp | string): boolean => {
     const validationRegexp =
       regexp instanceof RegExp ? regexp : new RegExp(regexp);
@@ -83,5 +83,3 @@ const validations = {
     (validations.isFile(value) &&
       fileTypes.split(",").indexOf(value.type) !== -1),
 };
-
-export default validations;
