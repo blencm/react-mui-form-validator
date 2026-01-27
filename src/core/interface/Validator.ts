@@ -41,7 +41,7 @@ export type ComponentProps = {
   validatorListener?: (value: boolean) => void;
   withRequiredValidator?: boolean;
   containerProps?: object;
-  onChangeTel: (value: string, info: MuiTelInputInfo) => void;
+  onChangeTel?: (value: string, info: MuiTelInputInfo) => void;
 };
 
 export type ValidatorComponentProps = (

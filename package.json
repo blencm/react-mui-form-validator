@@ -1,6 +1,6 @@
 {
   "name": "react-mui-form-validator",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Validator for forms designed with material-ui components.",
   "type": "module",
   "main": "./lib/index.cjs",
