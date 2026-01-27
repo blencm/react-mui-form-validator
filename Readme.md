@@ -1,5 +1,4 @@
-
-## Validation component for material-ui forms
+## Validation component for MUI forms
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://opensource.org/licenses/MIT)
 
@@ -13,8 +12,6 @@ npm install react-mui-form-validator
 ### Info
 
 Some rules can accept extra parameter, example:
-
-TextField
 
 ```javascript
 <MuiTextField
@@ -48,22 +45,15 @@ export default function App(props: any) {
   return (
     <div>
       <h3>Example Sign In</h3>
-      <MuiForm
-        onSubmit={handleSubmit}
-        onError={(errors: any) => console.log(errors)}
-      >
+      <MuiForm onSubmit={handleSubmit}>
         <MuiTextField
           name="email"
           label="Email"
           placeholder="example@domain.com"
           onChange={(v) => setEmail(v.target.value)}
           value={email}
-          validators={[
-            {
-              validator: "isEmail",
-            },
-          ]}
-          errorMessages={["Email is required"]}
+          validators={[{ validator: "required" }, { validator: "isEmail" }]}
+          errorMessages={["Email required", "Enter a valid email"]}
           fullWidth
         />
         <br />
@@ -75,3 +65,7 @@ export default function App(props: any) {
   );
 }
 ```
+
+## Authors
+
+- [@blencm](https://www.github.com/blencm)

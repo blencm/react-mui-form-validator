@@ -3,16 +3,20 @@ import { polyfill } from "react-lifecycles-compat";
 import ValidatorForm, { FormContext } from "./ValidatorForm";
 import { debounce } from "../utils/utils";
 import {
-  MuiTextFieldProps,
   ValidatorComponentProps,
   ValidatorComponentState,
 } from "../interface/Validator";
 
 class ValidatorComponent extends React.Component<
-  MuiTextFieldProps & ValidatorComponentProps,
+  ValidatorComponentProps,
   ValidatorComponentState
 > {
-  [x: string]: any;
+  renderValidatorComponent(): React.ReactNode {
+    throw new Error("Method not implemented.");
+  }
+  validateDebounced: any;
+  form: any;
+  debounceTime: any;
   getSnapshotBeforeUpdate(
     nextProps: ValidatorComponentProps,
     prevState: ValidatorComponentState

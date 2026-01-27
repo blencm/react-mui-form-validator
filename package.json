@@ -1,12 +1,21 @@
 {
   "name": "react-mui-form-validator",
-  "version": "1.5.4",
+  "version": "1.7.0",
   "description": "Validator for forms designed with material-ui components.",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "type": "module",
+  "main": "./lib/index.cjs",
+  "module": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "require": "./lib/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
-    "prod": "rimraf ./lib && tsup src/index.ts --dts --outDir=lib",
-    "start": "react-scripts start",
+    "build": "rimraf ./lib && tsup src/index.ts src/cli.ts --dts --format esm,cjs --outDir=lib --sourcemap",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -16,11 +25,14 @@
   },
   "keywords": [
     "react",
-    "mui",
-    "material-ui",
-    "form",
-    "form-validator",
-    "validator"
+    "react-forms",
+    "mui-form",
+    "mui-validator",
+    "validator",
+    "validations",
+    "mui-form-validator",
+    "react-validator",
+    "react-form-validator"
   ],
   "author": "Blencm",
   "license": "MIT",
@@ -29,26 +41,34 @@
   },
   "homepage": "https://github.com/blencm/react-mui-form-validator#readme",
   "dependencies": {
-    "libphonenumber-js": "^1.10.49",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "libphonenumber-js": "^1.12.35",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "react-lifecycles-compat": "^3.0.4"
   },
   "peerDependencies": {
-    "react": "^16.0.0 || ^17.0.0 || ^18.2.0",
-    "react-dom": "^16.0.0 || ^17.0.0 || ^18.2.0"
+    "react": "^16.0.0 || ^17.0.0 || ^18.3.1 || ^19.2.4 || 20.0.0",
+    "react-dom": "^16.0.0 || ^17.0.0 || ^18.3.1 || ^19.2.4 || 20.0.0"
   },
   "devDependencies": {
-    "@mui/material": "^5.14.16",
-    "@types/node": "^20.8.10",
-    "@types/react": "^18.2.34",
-    "@types/react-dom": "^18.2.14",
-    "@types/react-lifecycles-compat": "^3.0.3",
-    "mui-tel-input": "4.0.1",
-    "rimraf": "^5.0.5",
-    "tsup": "^7.2.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.9.5"
+    "@babel/preset-env": "^7.28.6",
+    "@babel/preset-flow": "^7.27.1",
+    "@babel/preset-react": "^7.28.5",
+    "@jest/globals": "^30.2.0",
+    "@mui/material": "^7.3.7",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^25.0.10",
+    "@types/react": "^19.2.9",
+    "@types/react-dom": "^19.2.3",
+    "@types/react-lifecycles-compat": "^3.0.4",
+    "@types/react-test-renderer": "^19.1.0",
+    "babel-jest": "^30.2.0",
+    "jest": "^30.2.0",
+    "mui-tel-input": "9.0.1",
+    "react-test-renderer": "^19.2.4",
+    "rimraf": "^6.1.2",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
   },
   "browserslist": {
     "production": [

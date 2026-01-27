@@ -2,13 +2,13 @@ import * as React from "react";
 import { validations } from "./ValidationRules";
 import { ValidatorFormProps } from "../interface/Validator";
 import { Validator } from "../types/ValidatorType";
+import { Box, BoxProps } from "@mui/material";
 
 const FormContext = React.createContext<any>("form");
 
 export { FormContext };
 
-class ValidatorForm extends React.Component<ValidatorFormProps> {
-
+class ValidatorForm extends React.Component<ValidatorFormProps & BoxProps> {
   static getValidator = (
     validator: Validator,
     value: any,
@@ -99,7 +99,8 @@ class ValidatorForm extends React.Component<ValidatorFormProps> {
 
   errors: any[] = [];
 
-  debounceTime: number = this.props.debounceTime !== undefined ? this.props.debounceTime : 0;
+  debounceTime: number =
+    this.props.debounceTime !== undefined ? this.props.debounceTime : 0;
 
   attachToForm = (component: any) => {
     if (this.childs.indexOf(component) === -1) {
@@ -218,9 +219,9 @@ class ValidatorForm extends React.Component<ValidatorFormProps> {
     } = this.props;
     return (
       <FormContext.Provider value={this.getFormHelpers()}>
-        <form {...rest} onSubmit={this.submit}>
+        <Box component="form" {...rest} onSubmit={this.submit}>
           {children}
-        </form>
+        </Box>
       </FormContext.Provider>
     );
   }
